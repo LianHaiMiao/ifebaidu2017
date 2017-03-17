@@ -1,0 +1,135 @@
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+li {
+    display: inline;
+    background-color: rgba(52,152,219,0.5);
+    padding: 10px 15px 10px 15px;
+    border-radius: 10px;
+    color: rgba(52,152,219,1);
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+li a {
+    text-decoration: none;
+}
+
+li:hover,li:visited{
+    background-color: rgba(231,76,60,0.5);
+}
+
+.container {
+    position: relative;
+    background-color: #eee;
+    padding: 10px;
+    border: solid 2px #999;
+    /*height: */
+}
+
+nav {
+    width: 100%;
+    height: 120px;
+}
+
+nav ul {
+    position: relative;
+    top: 25px;
+}
+
+.container {
+    position: relative;
+    border: #999;
+}
+
+
+/*使用flex进行布局*/
+
+.box {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-direction: row;
+    border: solid 1px #999;
+}
+
+
+
+.center_left {
+    height: 120px;
+    width: 290px;
+    background-color: white;
+    margin: 10px 25px;
+    position: relative;
+}
+
+.center_left img {
+    margin: 10px;
+
+}
+
+.team_name {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    margin:0;
+    font-size:16px;
+    font-weight: bolder;
+}
+
+.img_logo {
+    width: 80px;
+    height: 80px;
+}
+
+/*
+通过定位实现
+.center_left p {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    margin: 0;
+}
+*/
+/*通过浮动实现*/
+/*.center_left p {
+    float: right;
+    margin: 1em 1em 0 0;
+}*/
+
+
+.center_center {
+    margin: 10px auto;
+    background-color: white;
+    height: 550px;
+    width: auto;
+}
+
+.mar_pad {
+    margin: 10px;
+    padding: 0 5px;
+    font-size:15px;
+}
+.center_right {
+    height:420px;
+    width:160px;
+    background-color: white;
+    padding: 20px;
+    margin: 10px 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.center_right img {
+    width: 60px;
+    height: 80px;
+    margin: 0 0 10px 10px;
+}
