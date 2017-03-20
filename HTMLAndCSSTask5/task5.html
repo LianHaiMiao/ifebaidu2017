@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="百度前端技术学院">
+        <title>百度前端技术学院html作业</title>
+        <link rel="stylesheet" href="task5.css">
+    </head>
+    <body>
+        <nav class="nav">
+            <img src="https://img0.bdstatic.com/static/searchresult/img/logo-2X_b99594a.png" alt="百度logo" class="top_img_left">
+            <ul class="top_ul">
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">WORKS</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">CONTACTS</a></li>
+            </ul>
+        </nav>
+        <div id="wrap">
+            <article class="main">
+                <section class=" common">
+                    <h1>H1标题</h1>
+                    <br>
+                    <p>段落标签,献上一首古诗</p>
+                    <!-- 预格式化标记 -->
+                    <p>
+                        窗前明月光,疑是地上霜.
+                        举头望明月,低头思故乡.
+                    </p>
+                </section>
+
+                <section class="common">
+                <h2>列表,杂七杂八</h2>
+                    <br>
+                    <ul>
+                        <li>无序标签1</li>
+                        <li>无序标签2</li>
+                        <li>无序标签3</li>
+                        <li>无序标签4</li>
+                    </ul>
+
+                    <i>数</i><b>学</b><sub>公</sub><sup>式</sup><u>很有意思</u>
+
+                    <img src="https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=2920084749,2018893236&fm=58&s=39C718720E8EBE011B398BAC0300F024" alt="百度logo">
+                    <a href="https://www.baidu.com" target="_blank" name="up">百度</a>♀
+                </section>
+
+                <section class="common ">
+                    <h3>表格</h3>
+                    <table border="1px">
+                        <thead>
+                            <th>班级</th>
+                            <th>姓名</th>
+                            <th>学号</th>
+                            <th>性别</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2017</td>
+                                <td>王二麻子</td>
+                                <td>550</td>
+                                <td>男</td>
+                            </tr>
+                            <tr>
+                                <td>2017</td>
+                                <td>王三麻子</td>
+                                <td>551</td>
+                                <td>男</td>
+                            </tr>
+                            <tr>
+                                <td>2017</td>
+                                <td>王四麻子</td>
+                                <td>552</td>
+                                <td>男</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section class="common ">
+                    <h4>图片</h4>
+                    <div class="imggroup">
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                        <div class="respondimg"> <p>好看的图片</p> <img src="great.jpeg" alt="图片" style="width:100px;height:80px;"></div>
+                    </div>
+                </section>
+
+            </article>
+            <aside class="aside common">
+                <h2>这是一个侧栏</h2>
+                <form class="form-group" action="index.html" method="post">
+                    姓名: <input type="text" name="name" value="" placeholder="请输入姓名" style="width:200px">
+                    <p class="grayfont">请输入真实姓名</p>
+                    密码: <input type="password" name="password" value="" placeholder="密码" style="width:200px">
+                    <p>
+                        <h5>你喜欢的科目</h5>
+                        <input type="radio" name="class" value="">语文
+                        <input type="radio" name="class" value="">数学
+                        <input type="radio" name="class" value="">英语
+                    </p>
+                    <div class="container">
+                        <div class="title">你来自哪个省?</div>
+                        <div class="input">
+                            <select class="province" name="province">
+                                <option value="beijing" selected> 北京</option>
+                                <option value="shanghai" selected> 上海</option>
+                                <option value="shenzhen" selected> 深圳</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p>
+                        <h5>你喜欢的老师</h5>
+                        <input type="checkbox" name="teacher" value="">英语老师
+                        <input type="checkbox" name="teacher" value="">数学老师
+                        <input type="checkbox" name="teacher" value="">语文老师
+                    </p>
+                    <p>
+                        <h5>你喜欢这门科目或这个老师的理由</h5>
+                        <textarea name="reason" rows="8" cols="20"></textarea>
+                    </p>
+                    <button type="button" name="button" class="button col-md-12">确认提交</button>
+                </form>
+            </aside>
+        </div>
+        <footer class="footer">
+            <a href="#up">这个是一个锚点,带你去看百度logo</a>
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,194 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+/*
+* 栅格布局
+*/
+.col-md-12 {
+width: 100%;
+}
+.col-md-11 {
+width: 91.66666667%;
+}
+.col-md-10 {
+width: 83.33333333%;
+}
+.col-md-9 {
+width: 75%;
+}
+.col-md-8 {
+width: 66.66666667%;
+}
+.col-md-7 {
+width: 58.33333333%;
+}
+.col-md-6 {
+width: 50%;
+}
+.col-md-5 {
+width: 41.66666667%;
+}
+.col-md-4 {
+width: 33.33333333%;
+}
+.col-md-3 {
+width: 25%;
+}
+.col-md-2 {
+width: 16.66666667%;
+}
+.col-md-1 {
+width: 8.33333333%;
+}
+
+body {
+    background: url('background.jpeg');
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.mar0auto {
+    margin: 0 auto;
+}
+
+/*
+* top nav 部分
+*/
+
+.nav {
+    width: 100%;
+    height: 80px;
+    background-color: black;
+    margin: 0;
+    padding: 0;
+}
+
+.top_img_left {
+    width: 150px;
+    height: 50px;
+    float: left;
+    padding: 0;
+    margin: 15px 0 15px 25px;
+}
+.top_ul {
+    font:16px verdana, arial, sans-serif; /* 设置文字大小和字体样式 */
+}
+.top_ul li{
+    list-style: none; /* 将默认的列表符号去掉 */
+    padding: 0;/* 将默认的内边距去掉 */
+    float: right;
+    margin: 25px 0 15px 25px;
+}
+.top_ul li a{
+    display: block;
+    padding: 8px 20px;
+}
+
+
+/*
+* 中间,左侧自适应,右侧固定区域
+*/
+
+#wrap {
+    *zoom: 1; position: relative;
+}
+
+.main {
+    margin-right: 310px;
+}
+
+.aside {
+    width: 300px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.common {
+    background: url('common.jpeg');
+    margin: 15px;
+    padding: 20px 10px;
+}
+
+
+.grayfont {
+    color: gray;
+    font-size: 15px;
+    margin-left: 40px;
+}
+
+.button {
+    background-color: blue;
+    border-radius: 20px;
+    color: white;
+}
+
+
+/*
+* 输入框模块
+*/
+
+.container {
+    position: relative;
+}
+
+.container .title {
+    display: block;
+    float: left;
+    width: 120px;
+    font-size: 16px;
+    text-align: right;;
+    line-height: 30px;
+}
+
+.container .input {
+    display: block;
+    margin-left: 130px;
+}
+
+
+/*
+* 图像显示模块
+*/
+
+
+.imggroup {
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.respondimg {
+    border: 1px solid gray;
+    margin: 15px;
+}
+.respondimg p {
+    text-align: center;
+}
+
+.respondimg img {
+    margin: 0 10px;
+}
+
+/*
+* 注脚
+*/
+.footer {
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    padding: 0;
+    text-align: center;
+    margin-top: 1em
+}
+.footer a {
+    position: relative;
+    top: 10px;
+}
