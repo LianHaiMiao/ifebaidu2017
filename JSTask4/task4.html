@@ -47,22 +47,28 @@
         var input = document.getElementById('input');
         var queue_node = document.getElementById('queue');
         //左侧输入
+
         var lci = document.getElementById('lci');
         lci.addEventListener("click", function() {
             if (!isNaN(input.value)) {
-                queue.unshift();
+                queue.unshift(input.value);
                 show(queue);
+            } else {
+                alert('请不要输入非数字');
             }
-            alert('请不要输入非数字');
+
         });
+
         //右侧输入
         var rci = document.getElementById('rci');
         rci.addEventListener("click", function() {
             if (!isNaN(input.value)) {
                 queue.push(input.value);
                 show(queue);
+            } else {
+                alert('请不要输入非数字');
+
             }
-            alert('请不要输入非数字');
         });
 
         //左侧出
