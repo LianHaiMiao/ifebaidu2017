@@ -49,7 +49,7 @@
         //左侧输入
         var lci = document.getElementById('lci');
         lci.addEventListener("click", function() {
-            !isNaN(input.value) {
+            if (!isNaN(input.value)) {
                 queue.unshift();
                 show(queue);
             }
@@ -58,7 +58,7 @@
         //右侧输入
         var rci = document.getElementById('rci');
         rci.addEventListener("click", function() {
-            !isNaN(input.value) {
+            if (!isNaN(input.value)) {
                 queue.push(input.value);
                 show(queue);
             }
