@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS任务4</title>
+    <style type="text/css">
+        .right {
+            margin-left: 30px;
+        }
+        
+        #queue li {
+            float: left;
+            list-style: none;
+            background-color: red;
+            color: white;
+            padding: 8px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="input">
+
+    <span class="left">
+        <button id="lci">左侧入</button>
+        <button id="rci">右侧入</button>
+    </span>
+
+    <span class="right">
+        <button id="lco">左侧出</button>
+        <button id="rco">右侧出</button>
+    </span>
+
+    <ul id="queue">
+
+    </ul>
+
+    <script type="text/javascript">
+        //初始化队列
+        var queue = [];
+        //获取输入
+        var input = document.getElementById('input');
+        var queue_node = document.getElementById('queue');
+        //左侧输入
+        var lci = document.getElementById('lci');
+        lci.addEventListener("click", function() {
+            queue.unshift(input.value);
+            show(queue);
+        });
+        //右侧输入
+        var rci = document.getElementById('rci');
+        rci.addEventListener("click", function() {
+            queue.push(input.value);
+            show(queue);
+        });
+
+        //左侧出
+        var lco = document.getElementById('lco');
+        lco.addEventListener("click", function() {
+            alert(queue.shift());
+            show(queue);
+        });
+
+        //右侧出
+        var rco = document.getElementById('rco');
+        rco.addEventListener("click", function() {
+            alert(queue.pop());
+            show(queue);
+        });
+
+        //展示queue
+        function show(queue) {
+            var list = document.getElementById('queue');
+            list.innerHTML = "";
+            for (var i = 0; i < queue.length; i++) {
+                var child_li = document.createElement('li');
+                child_li.innerText = queue[i];
+                list.appendChild(child_li);
+            }
+        }
+
+        show(queue);
+    </script>
+</body>
+
+</html>
