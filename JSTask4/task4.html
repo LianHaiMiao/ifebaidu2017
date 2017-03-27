@@ -17,6 +17,7 @@
             background-color: red;
             color: white;
             padding: 8px;
+            margin: 5px;
             font-size: 15px;
         }
     </style>
@@ -48,14 +49,20 @@
         //左侧输入
         var lci = document.getElementById('lci');
         lci.addEventListener("click", function() {
-            queue.unshift(input.value);
-            show(queue);
+            !isNaN(input.value) {
+                queue.unshift();
+                show(queue);
+            }
+            alert('请不要输入非数字');
         });
         //右侧输入
         var rci = document.getElementById('rci');
         rci.addEventListener("click", function() {
-            queue.push(input.value);
-            show(queue);
+            !isNaN(input.value) {
+                queue.push(input.value);
+                show(queue);
+            }
+            alert('请不要输入非数字');
         });
 
         //左侧出
