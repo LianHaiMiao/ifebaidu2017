@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS任务5</title>
+    <style type="text/css">
+        .right {
+            margin-left: 30px;
+        }
+        
+        #queue {
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        #queue li {
+            list-style: none;
+            background-color: red;
+            color: white;
+            margin: 5px;
+            width: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="input">
+
+    <span class="left">
+        <button id="lci">左侧入</button>
+        <button id="rci">右侧入</button>
+    </span>
+
+    <span class="right">
+        <button id="lco">左侧出</button>
+        <button id="rco">右侧出</button>
+    </span>
+
+    <span><button id="sort" onclick="bubble_sort()">排序</button></span>
+
+    <ul id="queue">
+
+    </ul>
+
+    <script type="text/javascript">
+        //初始化队列
+        var queue = [];
+        //获取输入
+        var input = document.getElementById('input');
+        var queue_node = document.getElementById('queue');
+        //左侧输入
+
+        var lci = document.getElementById('lci');
+        lci.addEventListener("click", function() {
+            if (limit_number(input.value) && !is_full(queue)) {
+                queue.unshift(input.value);
+                show(queue);
+            }
+        });
+
+        //右侧输入
+        var rci = document.getElementById('rci');
+        rci.addEventListener("click", function() {
+            if (limit_number(input.value) && !is_full(queue)) {
+                queue.push(input.value);
+                show(queue);
+            }
+        });
+
+        //左侧出
+        var lco = document.getElementById('lco');
+        lco.addEventListener("click", function() {
+            alert(queue.shift());
+            show(queue);
+        });
+
+        //右侧出
+        var rco = document.getElementById('rco');
+        rco.addEventListener("click", function() {
+            alert(queue.pop());
+            show(queue);
+        });
+
+        //展示queue
+        function show(queue) {
+            var list = document.getElementById('queue');
+            list.innerHTML = "";
+            for (var i = 0; i < queue.length; i++) {
+                var child_li = document.createElement('li');
+                child_li.style.height = queue[i] + "px";
+                list.appendChild(child_li);
+            }
+        }
+
+        //限制输入的数组
+        function limit_number(number) {
+            if (!isNaN(number)) {
+                if (number >= 10 && number < 100) {
+                    return true;
+                }
+                alert('请输入10~100之间的数字');
+                return false;
+
+            } else {
+                alert('请不要输入非数字');
+                return false;
+            }
+        }
+
+        //判断队列元素
+        function is_full(queue) {
+            if (queue.length < 60) {
+                return false;
+            } else {
+                alert('添加元素超过60个');
+                return true;
+            }
+        }
+
+        //冒泡排序
+        function bubble_sort() {
+            var i = queue.length;
+            var j = 0,
+                tempExchangVal;
+            while (i > 0) {
+                for (j; j < i; j++) {
+                    if (queue[j] > queue[j + 1]) {
+                        tempExchangVal = queue[j];
+                        queue[j] = queue[j + 1];
+                        queue[j + 1] = tempExchangVal;
+                        setTimeout(" ", 1000);
+                    }
+                }
+                show(queue);
+                i--;
+            }
+            show(queue);
+        }
+
+        show(queue);
+    </script>
+</body>
+
+</html>
