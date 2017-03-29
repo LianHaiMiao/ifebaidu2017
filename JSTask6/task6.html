@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS任务6</title>
+    <style type="text/css">
+        .right {
+            margin-left: 30px;
+        }
+        
+        #queue li {
+            float: left;
+            list-style: none;
+            background-color: red;
+            color: white;
+            padding: 8px;
+            margin: 5px;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea name="" id="textarea" cols="30" rows="10" placeholder="输入的内容用分号;隔开"></textarea>
+    <span class="left">
+        <button id="lci">左侧入</button>
+        <button id="rci">右侧入</button>
+    </span>
+
+    <span class="right">
+        <button id="lco">左侧出</button>
+        <button id="rco">右侧出</button>
+    </span>
+
+    <input type="text" id="search_input">
+
+    <span><button id="search">查询</button></span>
+
+    <ul id="queue">
+
+    </ul>
+
+    <script type="text/javascript">
+        //初始化队列
+        var queue = [];
+        //获取输入
+        var input = document.getElementById('textarea');
+        var queue_node = document.getElementById('queue');
+        var search_btn = document.getElementById('search');
+
+
+        //左侧输入
+        var lci = document.getElementById('lci');
+        lci.addEventListener("click", function() {
+            var arr = deal_string(input.value);
+            Array.prototype.unshift.apply(queue, arr);
+            show(queue);
+        });
+
+        //右侧输入
+        var rci = document.getElementById('rci');
+        rci.addEventListener("click", function() {
+            var arr = deal_string(input.value);
+            Array.prototype.push.apply(queue, arr)
+            show(queue);
+        });
+
+        //左侧出
+        var lco = document.getElementById('lco');
+        lco.addEventListener("click", function() {
+            alert(queue.shift());
+            show(queue);
+        });
+
+        //右侧出
+        var rco = document.getElementById('rco');
+        rco.addEventListener("click", function() {
+            alert(queue.pop());
+            show(queue);
+        });
+
+        //展示queue
+        function show(queue) {
+            var list = document.getElementById('queue');
+            list.innerHTML = "";
+            for (var i = 0; i < queue.length; i++) {
+                var child_li = document.createElement('li');
+                child_li.innerText = queue[i];
+                list.appendChild(child_li);
+            }
+        }
+
+
+        //带标记的展示
+        function spe_show(queue, sign) {
+            var list = document.getElementById('queue');
+            list.innerHTML = "";
+            for (var i = 0; i < queue.length; i++) {
+                var child_li = document.createElement('li');
+                child_li.innerText = queue[i];
+                if (sign.indexOf(i) != -1) {
+                    child_li.style.backgroundColor = "yellow";
+                }
+                list.appendChild(child_li);
+            }
+        }
+
+
+
+        //将传进来的值转化成数组
+        function deal_string(str) {
+            return str.split(';');
+        }
+
+        //查询按钮
+        function search(str) {
+            var re = new RegExp(str);
+            var sign = [];
+            for (var i = 0; i < queue.length; i++) {
+                console.log(queue[i]);
+                if (queue[i].match(re)) {
+                    sign.push(i);
+                }
+            }
+            spe_show(queue, sign);
+            console.log(sign);
+        }
+
+        search_btn.addEventListener("click", function() {
+            search(search_input.value);
+        });
+    </script>
+</body>
+
+</html>
