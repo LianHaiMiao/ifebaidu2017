@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>任务二：表单（二）多个表单项的动态校验</title>
+    <style type="text/css">
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        input {
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 5px;
+            border-color: black;
+        }
+        
+        .primary {
+            background-color: rgba(142, 68, 173, 0.8);
+            padding: 5px 10px;
+            border-radius: 12px;
+            color: white;
+            border: none;
+            position: relative;
+            left: 80px;
+        }
+        
+        .primary:hover,
+        .primary:visited {
+            background-color: rgba(231, 76, 60, 0.5);
+        }
+        
+        .col {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .two {
+            width: 500px;
+            display: flex;
+        }
+        
+        .front {
+            text-align: right;
+            width: 100px;
+        }
+        
+        .end {
+            margin-left: 15px;
+        }
+        
+        .container {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" id="form">
+        <!--名称-->
+        <div class="col">
+            <div class="two">
+                <span class="front">名称</span>
+                <input type="text" id="name" class="end" onfocus="shownameInfo()" onblur="shownameValidation(this.id)">
+            </div>
+        </div>
+        <div class="container">
+            <div id="temp_name"></div>
+        </div>
+        <!--密码-->
+        <div class="col">
+            <div class="two">
+                <span class="front">密码</span>
+                <input type="password" id="password" value="" class="end" onfocus="showpasswordInfo()" onblur="showpasswordValidation(this.id)">
+            </div>
+        </div>
+        <div class="container">
+            <div id="temp_password"></div>
+        </div>
+        <!--密码确认-->
+        <div class="col">
+            <div class="two">
+                <span class="front">密码确认    </span>
+                <input type="password" id="repassword" class="end" onfocus="showrepasswordInfo()" onblur="showrepasswordValidation(this.id)">
+            </div>
+        </div>
+        <div class="container">
+            <div id="temp_repassword"></div>
+        </div>
+        <!--邮箱-->
+        <div class="col">
+            <div class="two">
+                <span class="front">邮箱    </span>
+                <input type="text" id="email" class="end" onfocus="showemailInfo()" onblur="showemailValidation(this.id)">
+            </div>
+        </div>
+        <div class="container">
+            <div id="temp_email"></div>
+        </div>
+        <!--手机-->
+        <div class="col">
+            <div class="two">
+                <span class="front">手机    </span>
+                <input type="text" id="mobile" class="end" onfocus="showmobileInfo()" onblur="showmobileValidation(this.id)">
+            </div>
+        </div>
+        <div class="container">
+            <div id="temp_mobile"></div>
+        </div>
+        <div class="col"> <button type="button" class="primary" id="button">提交</button> </div>
+    </form>
+</body>
+
+
+<script type="text/javascript">
+    var name = document.getElementById('name');
+    var password = document.getElementById('password');
+    var repassword = document.getElementById('repassword');
+    var email = document.getElementById('email');
+    var mobile = document.getElementById('mobile');
+
+    var button = document.getElementById('button');
+    var truearr = {
+        name: false,
+        password: false,
+        repassword: false,
+        email: false,
+        mobile: false,
+    };
+
+    // 通用函数——改变样式
+    function style(val) {
+        val.style.paddingLeft = "115px";
+        val.style.fontSize = "15px";
+        val.style.textAlign = "left";
+        val.style.width = "500px";
+        val.style.position = "relative";
+        val.style.top = "-20px";
+    }
+    //通用函数——onfoucs处理
+    function common_deal(id, str) {
+        var temp = document.getElementById(id);
+        temp.innerHTML = str;
+        temp.style.color = "#1abc9c";
+        style(temp);
+    }
+
+    //设置成功边框颜色
+    function setSuccess(id) {
+        var temp = document.getElementById(id);
+        temp.style.borderColor = "#e67e22";
+    }
+
+    //设置失败边框颜色
+    function setFail(id) {
+        var temp = document.getElementById(id);
+        temp.style.borderColor = "#c0392b";
+    }
+
+
+    //通用函数——循环便利，计算字符串大小
+    function loop_len(content) {
+        var i, len = 0;
+        for (i = 0; i < content.length; i++) {
+            if (content[i].charCodeAt() >= 0 && content[i].charCodeAt() <= 256) {
+                len++;
+            } else {
+                len += 2;
+            }
+        }
+        return len;
+    }
+
+
+    //姓名聚焦获得提示
+    function shownameInfo() {
+        var str = "必填,长度为4~16个字符";
+        var id = 'temp_name';
+        common_deal(id, str);
+    }
+
+    //姓名取消聚焦获得提示
+    function shownameValidation(id) {
+        var temp = document.getElementById('temp_name');
+        style(temp);
+        nameValidation(temp, document.getElementById(id));
+    }
+
+    function nameValidation(output, input) {
+        truearr.name = false;
+        var content = input.value.split('');
+        if (content == 0) {
+            output.innerHTML = "名字不能为空";
+            output.style.color = "#c0392b";
+            setFail("name");
+            return;
+        }
+        len = loop_len(content);
+        if (len <= 16 && len >= 4) {
+            output.innerHTML = "名称格式正确";
+            output.style.color = "#f1c40f";
+            output.value = input.value;
+            truearr.name = true;
+            setSuccess("name");
+        } else {
+            output.innerHTML = "必填,长度为4~16个字符";
+            output.style.color = "#c0392b";
+            setFail("name");
+        }
+    }
+
+    //密码聚焦获得提示
+    function showpasswordInfo() {
+        var str = "必填,密码长度为8~15";
+        var id = 'temp_password';
+        common_deal(id, str);
+    }
+
+    //密码取消聚焦获得提示
+    function showpasswordValidation(id) {
+        var temp = document.getElementById('temp_password');
+        style(temp);
+        passwordValidation(temp, document.getElementById(id));
+    }
+
+    function passwordValidation(output, input) {
+        truearr.password = false;
+        var content = input.value.split('');
+        if (content == 0) {
+            output.innerHTML = "密码不能为空";
+            output.style.color = "#c0392b";
+            setFail("password");
+            return;
+        }
+        len = loop_len(content);
+        if (len <= 16 && len >= 8) {
+            output.innerHTML = "密码格式正确";
+            output.style.color = "#f1c40f";
+            output.value = input.value;
+            truearr.password = true;
+            setSuccess('password')
+        } else {
+            output.innerHTML = "必填,密码长度为8~15";
+            output.style.color = "#c0392b";
+            setFail("password");
+        }
+    }
+
+    //重复密码聚焦获得提示
+    function showrepasswordInfo() {
+        var str = "请确认所填写的密码";
+        var id = 'temp_repassword';
+        common_deal(id, str);
+    }
+
+    //重复密码取消聚焦获得提示
+    function showrepasswordValidation(id) {
+        var temp = document.getElementById('temp_repassword');
+        style(temp);
+        repasswordValidation(temp, document.getElementById(id));
+    }
+
+    function repasswordValidation(output, input) {
+        truearr.repassword = false;
+        var content = input.value.split('');
+        if (content == 0) {
+            output.innerHTML = "密码验证错误";
+            output.style.color = "#c0392b";
+            setFail('repassword');
+            return;
+        }
+        var temp = document.getElementById('temp_password');
+        //判断密码是否一致
+        if (temp.value == input.value) {
+            output.innerHTML = "验证通过";
+            output.style.color = "#f1c40f";
+            output.value = input.value;
+            truearr.repassword = true;
+            setSuccess('repassword');
+        } else {
+            output.innerHTML = "密码验证错误";
+            output.style.color = "#c0392b";
+            setFail('repassword');
+
+        }
+    }
+
+
+    //邮箱聚焦获得提示
+    function showemailInfo() {
+        var str = "请填写符合格式的邮箱";
+        var id = 'temp_email';
+        common_deal(id, str);
+    }
+
+    //邮箱取消聚焦获得提示
+    function showemailValidation(id) {
+        var temp = document.getElementById('temp_email');
+        style(temp);
+        emailValidation(temp, document.getElementById(id));
+    }
+
+    function emailValidation(output, input) {
+        truearr.email = false;
+        var content = input.value.split('');
+        if (content == 0) {
+            output.innerHTML = "邮箱不能为空";
+            output.style.color = "#c0392b";
+            setFail('email');
+            return;
+        }
+        //判断邮箱格式是否正确
+        var re = /^[\w\.]+@\w+\.\w+$/;
+        if (re.test(input.value)) {
+            output.innerHTML = "邮箱验证通过";
+            output.style.color = "#f1c40f";
+            output.value = input.value;
+            truearr.email = true;
+            setSuccess('email');
+        } else {
+            output.innerHTML = "邮箱验证错误";
+            output.style.color = "#c0392b";
+            setFail('email');
+        }
+    }
+
+
+    //电话聚焦获得提示
+    function showmobileInfo() {
+        var str = "请填写符合格式的手机";
+        var id = 'temp_mobile';
+        common_deal(id, str);
+    }
+
+    //电话取消聚焦获得提示
+    function showmobileValidation(id) {
+        var temp = document.getElementById('temp_mobile');
+        style(temp);
+        mobileValidation(temp, document.getElementById(id));
+    }
+
+    function mobileValidation(output, input) {
+        truearr.mobile = false;
+        var content = input.value.split('');
+        if (content == 0) {
+            output.innerHTML = "手机不能为空";
+            output.style.color = "#c0392b";
+            setFail('mobile');
+            return;
+        }
+        //判断手机格式是否正确
+        var re = /^1\d{10}$/;
+        if (re.test(input.value)) {
+            output.innerHTML = "手机验证通过";
+            output.style.color = "#f1c40f";
+            output.value = input.value;
+            truearr.mobile = true;
+            setSuccess('mobile');
+        } else {
+            output.innerHTML = "手机验证错误";
+            output.style.color = "#c0392b";
+            setFail('mobile');
+        }
+    }
+
+    button.addEventListener("click", function() {
+        for (var i in truearr) {
+            if (truearr[i]) {
+                continue;
+            } else {
+                alert('提交失败');
+                return;
+            }
+        }
+        console.log(truearr);
+        alert('提交成功');
+    });
+</script>
+
+
+
+
+</html>
