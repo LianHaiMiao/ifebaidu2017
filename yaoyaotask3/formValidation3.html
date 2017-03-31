@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        form {
+            text-align: center;
+        }
+        
+        .inner {
+            display: inline;
+            margin: 20px 40px 10px 0;
+        }
+        
+        .box {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" id="form" method="post" onsubmit="return checkForm()">
+        <div class="box">
+
+            <div class="inner">
+                <input type="radio" name="student" value="outerStudent" id="outerStudent" onclick="showList()"> <label for="outerStudent">非在校生</label>
+            </div>
+
+            <div class="inner">
+                <input type="radio" name="student" value="internalStudent" id="internalStudent" checked="true" onclick="showList()"> <label for="internalStudent">在校生</label>
+            </div>
+
+        </div>
+
+        <!-- 学校 -->
+        <div class="school" id="school">
+
+
+        </div>
+
+        <!-- 就业单位 -->
+        <div class="employment" id="employment">
+
+        </div>
+    </form>
+
+    <script>
+        var citys = ["北京", "上海", "成都", "武汉"];
+        var citys_school = {
+            "北京": ["北京大学", "清华大学", "中国人民大学", "北京师范大学", "北京航空航天大学"],
+            "上海": ["复旦大学", "上海交通大学", "同济大学", "华东师范大学", "华东理工大学"],
+            "成都": ["电子科技大学", "四川大学"],
+            "武汉": ["华中科技大学", "武汉大学"]
+        };
+        //页面加载完成时，执行window.onload事件，默认是显示在校生的情况
+        window.onload = function() {
+            showList()
+        }
+
+
+        // 判断被选中的是哪个单选框
+        function showList() {
+            var radio = document.getElementsByName('student');
+            for (var i = 0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    show(radio[i].id);
+                }
+            }
+        }
+
+        //根据id进行展示
+        function show(id) {
+            if (id == "outerStudent") {
+                employment(id);
+            } else if (id == "internalStudent") {
+                school(id);
+            } else {
+                alert('程序出错');
+            }
+        }
+
+        //学校框展示
+        function school(id) {
+            var school = document.getElementById('school');
+            //创建城市下拉框
+            var city = document.createElement('select');
+            var city_school = document.createElement('select');
+            city.name = "city";
+            //增加城市选项
+            for (var i = 0; i < citys.length; i++) {
+                add_opt = add_option(citys[i]);
+                if (i == 0) {
+                    add_opt.selected = "selected";
+                }
+                city.appendChild(add_opt);
+            }
+            school.appendChild(city);
+            //增加学校选项
+        }
+
+        //创建子选项
+        function add_option(value) {
+            var opt = document.createElement('option');
+            opt.value = value;
+            opt.innerHTML = value;
+            return opt;
+        }
+
+        //就业单位框展示
+        function employment(id) {
+            console.log('就业');
+        }
+    </script>
+</body>
+
+</html>
