@@ -18,7 +18,7 @@
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
             title: {
-                text: ' ECharts 柱状图'
+                text: ' ECharts 柱状图和折线图'
             },
             tooltip: {
                 trigger: 'axis',
@@ -28,7 +28,15 @@
             },
             legend: {
                 data: [{
-                    name: '销量',
+                    name: '柱状销量',
+                    // 强制设置图形为圆。
+                    icon: 'roundRect',
+                    // 设置文本为红色
+                    textStyle: {
+                        color: 'black'
+                    }
+                }, {
+                    name: '折线销量',
                     // 强制设置图形为圆。
                     icon: 'circle',
                     // 设置文本为红色
@@ -42,8 +50,12 @@
             },
             yAxis: {},
             series: [{
-                name: '销量',
+                name: '柱状销量',
                 type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }, {
+                name: '折线销量',
+                type: 'line',
                 data: [5, 20, 36, 10, 10, 20]
             }]
         };
