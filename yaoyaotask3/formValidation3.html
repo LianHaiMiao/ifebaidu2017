@@ -55,9 +55,11 @@
     </form>
 
     <script>
+        var school = document.getElementById('school');
+        var employment = document.getElementById('employment');
         var citys = ["北京", "上海", "成都", "武汉"];
         var citys_school = {
-            "北京": ["北京大学", "清华大学", "中国人民大学", "北京师范大学", "北京航空航天大学"],
+            "北京": ["北京大学", "清华大学", "中国人民大学", "北京师范大学", "北京邮电大学"],
             "上海": ["复旦大学", "上海交通大学", "同济大学", "华东师范大学", "华东理工大学"],
             "成都": ["电子科技大学", "四川大学"],
             "武汉": ["华中科技大学", "武汉大学"]
@@ -67,6 +69,18 @@
             showList()
         }
 
+        //清除内容函数
+        function clear_both(id) {
+            document.getElementById(id).innerHTML = "";
+        }
+
+        //
+        function add_div_box(parent, str) {
+            var div_box = document.createElement('span');
+            div_box.innerHTML = str;
+            div_box.style.marginRight = "30px";
+            parent.appendChild(div_box);
+        }
 
         // 判断被选中的是哪个单选框
         function showList() {
@@ -81,31 +95,51 @@
         //根据id进行展示
         function show(id) {
             if (id == "outerStudent") {
-                employment(id);
+                showemployment(id);
             } else if (id == "internalStudent") {
-                school(id);
+                showschool(id);
             } else {
                 alert('程序出错');
             }
         }
 
         //学校框展示
-        function school(id) {
-            var school = document.getElementById('school');
+        function showschool(id) {
+            //默认一个初始元素
+            var lucky = 0;
+            var lucky2 = "北京";
+            //初始化，清空 学校、就业单位两个下拉选择
+            clear_both("school");
+            clear_both("employment");
+            //增加div
+            add_div_box(school, "学校");
             //创建城市下拉框
             var city = document.createElement('select');
-            var city_school = document.createElement('select');
+            //加点边距以及赋予id
+            city.style.marginRight = "25px";
+            //改变事件、增加name和id
+            city.id = "city";
+            city.onchange = function() {
+                change_city_school();
+            };
             city.name = "city";
+            //城市的学校
+            var city_school = document.createElement('select');
+            city_school.id = "city_school";
             //增加城市选项
             for (var i = 0; i < citys.length; i++) {
                 add_opt = add_option(citys[i]);
-                if (i == 0) {
-                    add_opt.selected = "selected";
+                if (i == lucky) {
+                    add_opt.selected = "true";
                 }
                 city.appendChild(add_opt);
             }
             school.appendChild(city);
             //增加学校选项
+            for (var i = 0; i < citys_school[lucky2].length; i++) {
+                city_school.appendChild(add_option(citys_school[lucky2][i]));
+            }
+            school.appendChild(city_school);
         }
 
         //创建子选项
@@ -116,9 +150,33 @@
             return opt;
         }
 
+
+        //onchange事件，根据此事件
+        function change_city_school() {
+            //获取select改变之后的值
+            var obj = document.getElementById('city');
+            var index = obj.selectedIndex;
+            var temp_city = obj.options[index].value;
+            //根据城市改变学校
+            var city_school = document.getElementById("city_school");
+            clear_both("city_school");
+            for (var i = 0; i < citys_school[temp_city].length; i++) {
+                city_school.appendChild(add_option(citys_school[temp_city][i]));
+            }
+        }
+
+
+
         //就业单位框展示
-        function employment(id) {
-            console.log('就业');
+        function showemployment(id) {
+            //清除学校展示
+            clear_both('school');
+            clear_both('employment');
+            //开始显示
+            add_div_box(employment, "就业单位");
+            //请输入就业单位
+            var employment_address = document.createElement('input');
+            employment.appendChild(employment_address);
         }
     </script>
 </body>
