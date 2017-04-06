@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ECharts NO.2 - 实现自定义的统计图表</title>
+    <script src="http://cdn.bootcss.com/echarts/3.5.0/echarts.common.min.js"></script>
+    <style>
+        #main {
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main" style="width: 800px;height:500px;"></div>
+    <script type="text/javascript">
+        // 初始化echart图表
+        var myChart = echarts.init(document.getElementById('main'));
+        var xData = function() {
+            var data = [];
+            for (var i = 1; i < 13; i++) {
+                data.push(i + "月份");
+            }
+            return data;
+        }();
+
+        option = {
+            title: {
+                text: '某商场男女顾客人数统计图',
+                subtext: '数据来源于网络',
+                textStyle: {
+                    color: '#fff'
+                },
+                subtextStyle: {
+                    color: '#fff',
+                    fontSize: '16',
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            backgroundColor: "#3498db",
+            legend: {
+                data: ['男性', '女性']
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: xData,
+                nameLocation: "middle",
+                name: '月份',
+                nameGap: "20"
+            },
+            yAxis: {
+                position: 'left',
+                type: 'value',
+                name: '人数统计',
+                nameLocation: "middle",
+                nameGap: "40"
+            },
+            series: [{
+                name: '男性',
+                type: 'bar',
+                data: [709, 1917, 2455, 2610, 1719, 1433, 1544, 3285, 5208, 3372, 2484, 4078],
+                barGap: "3%"
+
+            }, {
+                name: '女性',
+                type: 'bar',
+                data: [327, 1776, 507, 1200, 800, 482, 204, 1390, 1001, 951, 381, 220]
+            }]
+        };
+        myChart.setOption(option);
+    </script>
+</body>
+
+</html>
